@@ -45,5 +45,4 @@ foreach($conn->query("SELECT p.image_url, p.title, p.date, p.excerpt, u.Name, u.
         </div>
     </div>
 <?php
-
 }
