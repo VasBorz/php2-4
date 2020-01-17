@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
     <link rel="stylesheet" href="css/custom.css" type="text/css" />
-
+    <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/responsive.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -312,18 +312,16 @@
                     <!-- Posts
                     ============================================= -->
                     <div id="posts">
-
                         <div class="entry clearfix">
                             <div class="entry-image">
                                 <a href="#">
-                                    <img class="image_fade" src="images/blog/standard/17.jpg">
+                                    <img class="image_fade" src="images/blog/standard/20.jpg">
                                 </a>
                             </div>
                             <div class="entry-title">
                                 <h2>
                                     <a href="single.html">
-                                        This is a Standard post with a Preview Image
-                                    </a>
+                                        This is a Standard post with a Preview Image                </a>
                                 </h2>
                             </div>
                             <ul class="entry-meta clearfix">
@@ -356,20 +354,40 @@
                                 <a href="#" class="more-link">Read More</a>
                             </div>
                         </div>
-
-
                     </div><!-- #posts end -->
+                    <div id="posts_ajax">
 
+                    </div>
                     <!-- Pagination
                     ============================================= -->
                     <div class="row mb-3">
                         <div class="col-12">
-                            <a href="#" class="btn btn-outline-dark float-right">
+                            <a class="btn btn-outline-dark float-right" id="button">
                                 Load More &rarr;
                             </a>
                         </div>
                     </div>
                     <!-- .pager end -->
+
+                    <script>
+                        let button = document.getElementById("button"),
+                            limit = 0;
+
+                        button.addEventListener('click', () => {
+                            let request = new XMLHttpRequest();
+
+                            request.open('POST','load.php');
+                            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            request.send(limit += 1);
+                            request.onreadystatechange = function() {
+                                if (request.readyState === 4 && request.status === 200) {
+                                    document.getElementById("posts_ajax").innerHTML = request.responseText;
+                                }
+                            }
+                        });
+
+
+                    </script>
 
                 </div><!-- .postcontent end -->
 
